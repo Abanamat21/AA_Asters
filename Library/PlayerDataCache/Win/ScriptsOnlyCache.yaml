@@ -608,4 +608,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: E:/ProgProjects/C#/Unity/AA_Asters/bin/win/AA_Asters.exe
+  playerPath: E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Release/win/AA_Asters.exe
