@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public interface IWall
 {
-    void warpIt(GameObject gameObject);
+    void WarpIt(GameObject gameObject);
 }

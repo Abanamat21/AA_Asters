@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class ProjectileToLoad
 {
-    public GameObject prephab;
-    public Vector3 position;
-    public Quaternion quaternion;
-    public GameObject parent;
-    public GameObject source;
+    public GameObject Prephab;
+    public Vector3 Position;
+    public Quaternion ObjectQuaternion;
+    public GameObject Parent;
+    public GameObject Source;
 
 
-    public ProjectileToLoad(GameObject _prephab, Vector3 _position, Quaternion _quaternion, GameObject _parent, GameObject _source)
+    public ProjectileToLoad(GameObject prephab, Vector3 position, Quaternion quaternion, GameObject parent, GameObject source)
     {
-        prephab = _prephab;
-        position = _position;
-        quaternion = _quaternion;
-        parent = _parent;
-        source = _source;
+        Prephab = prephab;
+        Position = position;
+        ObjectQuaternion = quaternion;
+        Parent = parent;
+        Source = source;
     }
 }

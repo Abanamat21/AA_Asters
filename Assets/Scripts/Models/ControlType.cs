@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class ControlType
 {
-    public static readonly ControlType keyboard = new ControlType() { 
-        name = "keyboard", 
-        menuDisplayName = "Управление: клавиатура",
-        moveForvardAxisRawName = "Vertical",
-        rotateAxisRawName = "Horizontal",
-        shootButtonName = "Fire1"
-    };
-    public static readonly ControlType keyboardMouse = new ControlType() { 
-        name = "keyboardMouse", 
-        menuDisplayName = "Управление: клавиатура + мышь",
-        moveForvardAxisRawName = "Vertical2",
-        rotateAxisRawName = "[MOUSE]",
-        shootButtonName = "Fire2"
-    };
-    
-    private ControlType() { }
+    public string Name;
+    public string MenuDisplayName;
+    public string MoveForvardAxisRawName;
+    public string RotateAxisRawName;
+    public string ShootButtonName;
 
-    public string name;
-    public string menuDisplayName;
-    public string moveForvardAxisRawName;
-    public string rotateAxisRawName;
-    public string shootButtonName;
+    public static readonly ControlType keyboard = new ControlType()
+    {
+        Name = "keyboard",
+        MenuDisplayName = "Управление: клавиатура",
+        MoveForvardAxisRawName = "Vertical",
+        RotateAxisRawName = "Horizontal",
+        ShootButtonName = "Fire1"
+    };
+    public static readonly ControlType keyboardMouse = new ControlType()
+    {
+        Name = "keyboardMouse",
+        MenuDisplayName = "Управление: клавиатура + мышь",
+        MoveForvardAxisRawName = "Vertical2",
+        RotateAxisRawName = "[MOUSE]",
+        ShootButtonName = "Fire2"
+    };
+
+    private ControlType() { }
 }

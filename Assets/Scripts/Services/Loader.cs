@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class Loader : MonoBehaviour
 {
+    private static Loader instance { get; set; }
+    public static Loader Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     public GameObject InstantiateIt(GameObject gameObject, Vector3 position, Quaternion quaternion, GameObject parent)
     {
         return Instantiate(gameObject, position, quaternion, parent.transform);
     }
     public GameObject InstantiateIt(ProjectileToLoad projectile)
     {
-        GameObject newProjectile = Instantiate(projectile.prephab, projectile.position, projectile.quaternion, projectile.parent.transform);
+        GameObject newProjectile = Instantiate(projectile.Prephab, projectile.Position, projectile.ObjectQuaternion, projectile.Parent.transform);
         ProjectileController projectileController = newProjectile.GetComponent<ProjectileController>();
-        projectileController.source = projectile.source;
+        projectileController.Source = projectile.Source;
         return newProjectile;
     }
 
     public GameObject InstantiateIt(AsteroidToLoad asteroid)
     {
-        GameObject newAsteroid = Instantiate(asteroid.prephab, asteroid.position, asteroid.quaternion, asteroid.parent.transform);
+        GameObject newAsteroid = Instantiate(asteroid.Prephab, asteroid.Position, asteroid.ObjectQuaternion, asteroid.Parent.transform);
         AsteroidController asteroidController = newAsteroid.GetComponent<AsteroidController>();
-        if (asteroid.size != 0) asteroidController.setAsterSize(asteroid.size);
-        asteroidController.setFlySpeed(asteroid.speed);
+        asteroidController.Size = asteroid.Size;
+        asteroidController.FlySpeed = asteroid.Speed;
         return newAsteroid;
     }
 }

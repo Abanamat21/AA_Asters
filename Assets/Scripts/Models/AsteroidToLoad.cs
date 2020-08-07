@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class AsteroidToLoad
 {
-    public GameObject prephab;
-    public int size;
-    public Vector3 position;
-    public Quaternion quaternion;
-    public GameObject parent;
-    public float speed;
+    public GameObject Prephab;
+    public int Size;
+    public Vector3 Position;
+    public Quaternion ObjectQuaternion;
+    public GameObject Parent;
+    public float Speed;
 
-    public AsteroidToLoad(GameObject _prephab, int _size, Vector3 _position, Quaternion _quaternion, GameObject _parent, float _speed)
+    public AsteroidToLoad(GameObject prephab, int size, Vector3 position, Quaternion quaternion, GameObject parent, float speed)
     {
-        prephab = _prephab;
-        size = _size;
-        position = _position;
-        quaternion = _quaternion;
-        parent = _parent;
-        speed = _speed;
+        Prephab = prephab;
+        Size = size;
+        Position = position;
+        ObjectQuaternion = quaternion;
+        Parent = parent;
+        Speed = speed;
     }
 }

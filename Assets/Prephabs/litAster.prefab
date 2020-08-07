@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780d2e16545cbfb479ecf2a69cc8e3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 0
+  Size: 1
   destructionAward: 100
 --- !u!82 &-608100165447048922
 AudioSource:

@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\AsteroidController.cs" />
     <Compile Include="Assets\Scripts\Controllers\ColliderPartController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameFieldController.cs" />
     <Compile Include="Assets\Scripts\Controllers\NLOController.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
@@ -66,47 +67,46 @@
     <Compile Include="Assets\Scripts\Controllers\UIController.cs" />
     <Compile Include="Assets\Scripts\Controllers\WallController.cs" />
     <Compile Include="Assets\Scripts\Exceptions\AAExceptions.cs" />
-    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\Exstentions\ObjectCooperationExstentions.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IHitable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IPoolable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStrikable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IWall.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IWarpable.cs" />
     <Compile Include="Assets\Scripts\Models\AsteroidToLoad.cs" />
     <Compile Include="Assets\Scripts\Models\AsteroidType.cs" />
     <Compile Include="Assets\Scripts\Models\ControlType.cs" />
     <Compile Include="Assets\Scripts\Models\NLOToLoad.cs" />
     <Compile Include="Assets\Scripts\Models\ProjectileToLoad.cs" />
+    <Compile Include="Assets\Scripts\Models\WallType.cs" />
     <Compile Include="Assets\Scripts\Services\AsteroidFactory.cs" />
     <Compile Include="Assets\Scripts\Services\Loader.cs" />
     <Compile Include="Assets\Scripts\Services\PoolManager.cs" />
-    <Compile Include="Assets\Scripts\Services\Services.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>E:/ProgProjects/GitHub/Public/Unity/AA_Asters/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>E:/ProgProjects/C#/Unity/AA_Asters/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.16f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

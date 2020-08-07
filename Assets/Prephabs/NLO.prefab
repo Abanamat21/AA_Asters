@@ -151,15 +151,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d016177e2f95854498c2304b24074686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  flyDirection: 0
-  projectile: {fileID: 4066634449273237087, guid: c6c3f5839108f9b4b8291675cd7c82ca,
+  Speed: 15
+  FlyDirection: 0
+  Projectile: {fileID: 4066634449273237087, guid: c6c3f5839108f9b4b8291675cd7c82ca,
     type: 3}
-  cooldownMin_Sec: 2
-  cooldownMax_Sec: 4
-  destructionAward: 200
-  spawnPeriodMin_Sec: 20
-  spawnPeriodMax_Sec: 40
+  CooldownMin_Sec: 1
+  CooldownMax_Sec: 5
+  DestructionAward: 200
+  Player: {fileID: 0}
+  SpawnPeriodMin_Sec: 20
+  SpawnPeriodMax_Sec: 40
 --- !u!82 &-8322873917285271057
 AudioSource:
   m_ObjectHideFlags: 0

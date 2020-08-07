@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Exstentions;
 
 public class AsteroidController : MonoBehaviour, IHitable, IPoolable
 {
-    private float flySpeed;
-    public int size;
-    private Vector3 lastPos;
-
+    #region Поля
+    public float FlySpeed { get; set; }
+    public int Size;
+    private Vector3 lastPos { get; set; }
     public float destructionAward;
+    #endregion
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        IStrikable strikable = collision.gameObject.GetComponent<IStrikable>();
-        if (strikable != null)
+    #region Служебные методы
+    void OnCollisionEnter(Collision collision)
+    {        
+        if (collision.gameObject.TryGetComponent<IStrikable>(out IStrikable strikable))
         {
             strikable.Strike(gameObject);
             Despawn();
@@ -23,56 +24,38 @@ public class AsteroidController : MonoBehaviour, IHitable, IPoolable
     {
         lastPos = transform.localPosition;
     }
-
     void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * flySpeed * Time.fixedDeltaTime);
+        transform.Translate(Vector3.forward * FlySpeed * Time.fixedDeltaTime);
 
-        RaycastHit hit;
-        if (Physics.Linecast(lastPos, transform.localPosition, out hit))
-        {
-            IWall wall = (IWall)hit.collider.gameObject.GetComponent<IWall>();
-            if (wall != null)
-            {
-                wall.warpIt(gameObject);
-            }
-        }
-
+        gameObject.WallEnteringLineCast(lastPos, transform.localPosition);
         lastPos = transform.localPosition;
     }
+    #endregion
 
-    public void hit(GameObject projectile, GameObject causer)
+    #region Публичные методы
+    public void Hit(GameObject projectile, GameObject causer)
     {
         Split();
     }
-
-    public void setFlySpeed(float speed)
-    {
-        flySpeed = speed;
-    }
-    public void setAsterSize(int _size)
-    {
-        size = _size;
-    }
     public void Split()
     {
-        List<AsteroidToLoad> asteroidsToLoad = GameController.instance.services.asteroidFactory.afterDestroitCreation(transform.localPosition, transform.rotation, size);
-        if(asteroidsToLoad != null && asteroidsToLoad.Count > 0)
-            asteroidsToLoad.ForEach(x => GameController.instance.services.poolManager.Spawn(x));
+        List<AsteroidToLoad> asteroidsToLoad = AsteroidFactory.Instance.afterDestroitCreation(transform.localPosition, transform.rotation, Size);
+        if (asteroidsToLoad != null && asteroidsToLoad.Count > 0)
+            asteroidsToLoad.ForEach(x => PoolManager.Instance.Spawn(x));
         Despawn();
     }
     public void Despawn()
     {
-        AudioSource.PlayClipAtPoint(GetComponent<AudioSource>().clip, transform.position);        
-        GameController.instance.services.poolManager.Despawn(gameObject);
+        AudioSource.PlayClipAtPoint(GetComponent<AudioSource>().clip, transform.position);
+        PoolManager.Instance.Despawn(gameObject);
     }
-
     public void OnSpawn()
     {
     }
-
     public void OnDespawn()
     {
-        GameController.instance.incrementScore(destructionAward);
+        GameController.Instance.incrementScore(destructionAward);
     }
+    #endregion
 }

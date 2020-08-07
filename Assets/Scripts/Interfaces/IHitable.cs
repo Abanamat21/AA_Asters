@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHitable
 {
-    void hit(GameObject projectile, GameObject causer);
+    void Hit(GameObject projectile, GameObject causer);
 }

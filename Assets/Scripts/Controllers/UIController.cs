@@ -1,94 +1,89 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    #region Поля
     public GameObject TogleControlTypeButton;
     public GameObject ContinueButton;
-    public GameObject menuCanvas;
-    public GameObject hudCanvas;
-    public GameObject endGameCanvas;
-
+    public GameObject MenuCanvas;
+    public GameObject HUDCanvas;
+    public GameObject EndGameCanvas;
     public GameObject EndGameTitleLabel;
     public GameObject ScoreValueLabel;
     public GameObject EndGameScoreValueLabel;
-
     public GameObject HPValueLabel;
+    #endregion
 
+    #region Служебные методы
     void Start()
     {
-        endGameCanvas.SetActive(false);
-        GameController.instance.services.uiController = this;
-        setControlType(GameController.instance.controlType);
-        GameController.instance.setPaused(true);
+        EndGameCanvas.SetActive(false);
+        setControlType(GameController.Instance.controlType);
+        GameController.Instance.setPaused(true);
+        ContinueButton.SetActive(false);
     }
-
     void Update()
     {
-        if (!GameController.instance.paused && Input.GetKeyDown(KeyCode.Escape))
+        if (!GameController.Instance.paused && Input.GetKeyDown(KeyCode.Escape))
         {
-            GameController.instance.setPaused(true);
+            GameController.Instance.setPaused(true);
         }
         Text ScoreValueLabelText = ScoreValueLabel.GetComponent<Text>();
-        ScoreValueLabelText.text = GameController.instance.score.ToString();
+        ScoreValueLabelText.text = GameController.Instance.score.ToString();
     }
+    #endregion
 
+    #region "События"
     public void NewGame()
     {
         Debug.Log("GameStart!");        
-        GameController.instance.NewGame();
-        endGameCanvas.SetActive(false);
+        GameController.Instance.NewGame();
+        EndGameCanvas.SetActive(false);
     }
-
     public void Exit()
     {
         Application.Quit();
     }
     public void Сontinue()
     {
-        GameController.instance.setPaused(false);
+        GameController.Instance.setPaused(false);
     }
-
     public void TogleControlType()
     {
-        ControlType oldControlType = GameController.instance.controlType;
+        ControlType oldControlType = GameController.Instance.controlType;
         ControlType newControlType;
-        if (oldControlType.name == ControlType.keyboard.name)
+        if (oldControlType.Name == ControlType.keyboard.Name)
         {
             newControlType = ControlType.keyboardMouse;
         }
-        else if (oldControlType.name == ControlType.keyboardMouse.name)
+        else if (oldControlType.Name == ControlType.keyboardMouse.Name)
         {
             newControlType = ControlType.keyboard;
         } else
         {
             newControlType = ControlType.keyboardMouse;
         }
-        Debug.Log(newControlType.name);
-        GameController.instance.controlType = newControlType;
+        Debug.Log(newControlType.Name);
+        GameController.Instance.controlType = newControlType;
         setControlType(newControlType);
     }
+    #endregion
 
     private void setControlType(ControlType controlType)
     {
-        TogleControlTypeButton.GetComponentInChildren<Text>().text = controlType.menuDisplayName;
+        TogleControlTypeButton.GetComponentInChildren<Text>().text = controlType.MenuDisplayName;
     }
-
     public void setPlayerHP(int curentHealth)
     {
         Text HPValueLabelText = HPValueLabel.GetComponent<Text>();
         HPValueLabelText.text = curentHealth.ToString();
     }
-
     public void fillEndGame(bool victory, float score)
     {
-        hudCanvas.SetActive(false);
-        menuCanvas.SetActive(false);
-        endGameCanvas.SetActive(true);
+        HUDCanvas.SetActive(false);
+        MenuCanvas.SetActive(false);
+        EndGameCanvas.SetActive(true);
         Text EndGameTitleLabelText = EndGameTitleLabel.GetComponent<Text>();
         EndGameTitleLabelText.text = victory ? "Победа!" : "Поражение!";
         Text EndGameScoreValueLabelText = EndGameScoreValueLabel.GetComponent<Text>();

@@ -1,34 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class ProjectileController : MonoBehaviour, IPoolable
 {
-    public float flySpeed;
+    public float FlySpeed;
     private Vector3 lastPos;
-    public GameObject source;
-    private TimeSpan ignoreSourcePeriod = new TimeSpan(0, 0, 0, 0, 300);
+    public GameObject Source;
+    private TimeSpan ignoreSourcePeriod = new TimeSpan(0, 0, 0, 0, 300); //300 милисекунд
     private DateTime created;
     
     void Update()
     {
     }
-
     void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * flySpeed * Time.fixedDeltaTime);
+        transform.Translate(Vector3.forward * FlySpeed * Time.fixedDeltaTime);
 
         RaycastHit hit;
         if (Physics.Linecast(lastPos, transform.localPosition, out hit))
         {            
             IHitable hitable;
-            hitable = (IHitable)hit.collider.gameObject.GetComponent<IHitable>();
+            hitable = hit.collider.gameObject.GetComponent<IHitable>();
             if (hitable != null && canHitIt(hit.collider.gameObject))
             {
-                hitable.hit(gameObject, source);
+                hitable.Hit(gameObject, Source);
 
-                if((IWall)hit.collider.gameObject.GetComponent<IWall>() == null)
+                if(hit.collider.gameObject.GetComponent<IWall>() == null)
                     Despawn();
             }
         }
@@ -38,22 +35,19 @@ public class ProjectileController : MonoBehaviour, IPoolable
 
     private bool canHitIt(GameObject gameObject)
     {
-        return (gameObject == source && created + ignoreSourcePeriod > DateTime.Now) 
-                || gameObject != source;
+        return (gameObject == Source && created + ignoreSourcePeriod > DateTime.Now) 
+                || gameObject != Source;
     }
-
     public void Despawn()
     {
-        GameController.instance.services.poolManager.Despawn(gameObject);
+        PoolManager.Instance.Despawn(gameObject);
     }
-
     public void OnSpawn()
     {
         lastPos = transform.localPosition;
         created = DateTime.Now;
         GetComponent<AudioSource>().Play();
     }
-
     public void OnDespawn()
     {
     }

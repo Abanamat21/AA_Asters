@@ -2,42 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidFactory
+public class AsteroidFactory : MonoBehaviour
 {
-    private GameObject defalteParent;
+    private static AsteroidFactory instance;
+    public static AsteroidFactory Instance
+    {
+        get
+        {
+            if (instance == null) 
+                instance = new AsteroidFactory();
+            return instance;
+        }
+    }
 
-    Dictionary<int, GameObject> prephabs;
+    public GameObject DefalteParent;
 
-    private float minSpeed;
-    private float maxSpeed;
+    //private Dictionary<int, GameObject> prephabs;
+    public List<GameObject> prephabsList;
+
+    public float MinSpeed;
+    public float MaxSpeed;
+
+    public float SpawnMargin_Percents;
+    public GameObject SpawnField;
 
     private Vector3 spawnScale;
 
-    public AsteroidFactory(GameObject _defalteParent, Dictionary<int, GameObject> _prephabs, Vector3 _spawnScale, float _minSpeed, float _maxSpeed)
+    void Awake()
     {
-        defalteParent = _defalteParent;
-        prephabs = _prephabs;
-        spawnScale = _spawnScale;
-        minSpeed = _minSpeed;
-        maxSpeed = _maxSpeed;
+        if (instance == null)
+        {
+            //instance = new AsteroidFactory();
+            instance = this;
+            spawnScale = SpawnField.transform.localScale;     
+        }
     }
+    //public AsteroidFactory()
+    //{
+    //    //prephabs = new Dictionary<int, GameObject>();
+    //    //for (int i = 0; i < prephabsList.Count; i++)
+    //    //{
+    //    //    prephabs.Add(i + 1, prephabsList[i]);
+    //    //}
+    //    instance = this;
+    //    spawnScale = spawnField.transform.localScale;
+    //}
 
-
-    //TODO привязать к префабам!
     public AsteroidToLoad createAster(Vector3 spawnPosition, Quaternion quaternion, float speed, int size = 0)
     {
-        if (prephabs == null || prephabs.Count == 0) throw new AAExceptions.ImportentComponentNotFound("prephabs was not set in AsteroidFactory");
+        //if (prephabs == null || prephabs.Count == 0) throw new AAExceptions.ImportentComponentNotFound("prephabs was not set in AsteroidFactory");
+        if (prephabsList == null || prephabsList.Count == 0) throw new AAExceptions.ImportentComponentNotFound("prephabs was not set in AsteroidFactory");
         Vector3 spawnPlace = spawnPosition;
         Quaternion spawnQuaternion = quaternion;
         GameObject aster;
-        if(size == 0) return createAster(Random.Range(1, prephabs.Count));
-        aster = prephabs[size];
+        if(size == 0) return createAster(Random.Range(1, prephabsList.Count));
+        aster = prephabsList[size - 1];
         if (spawnPlace == Vector3.zero && spawnQuaternion == Quaternion.Euler(0, 0, 0))
         {
             (spawnPlace, spawnQuaternion) = generateSpawnPosition(aster.GetComponent<SphereCollider>().radius);
         }
 
-        return new AsteroidToLoad(aster, size, spawnPlace, spawnQuaternion, defalteParent, speed);
+        return new AsteroidToLoad(aster, size, spawnPlace, spawnQuaternion, DefalteParent, speed);
     }
     public AsteroidToLoad createAster(Vector3 spawnPosition, Quaternion quaternion, int size = 0)
     {
@@ -78,25 +103,25 @@ public class AsteroidFactory
         float x, y;
         float rot;
 
-        int wallChous = Random.Range(1, 5);
-        switch (wallChous)
+        WallType wallType = (WallType)Random.Range(1, 5);
+        switch (wallType)
         {
-            case 1: //top
+            case WallType.top:
                 x = Random.Range(leftLimit, rightLimit);
                 y = topLimit;
                 rot = Random.Range(90 + rotMargin, 270 - rotMargin);
                 break;
-            case 2: //bottom
+            case WallType.bottom:
                 x = Random.Range(leftLimit, rightLimit);
                 y = bottomLimit;
                 rot = Random.Range(90 - rotMargin, -90 + rotMargin);                    
                 break;
-            case 3: //left
+            case WallType.right:
                 x = leftLimit;
                 y = Random.Range(bottomLimit, topLimit);
                 rot = Random.Range(180 + rotMargin, 360 - rotMargin);
                 break;
-            case 4: //right
+            case WallType.left:
                 x = rightLimit;
                 y = Random.Range(bottomLimit, topLimit);
                 rot = Random.Range(0 + rotMargin, 90 - rotMargin);
@@ -112,6 +137,6 @@ public class AsteroidFactory
 
     public float generateSpeed()
     {
-        return Random.Range(minSpeed, maxSpeed);
+        return Random.Range(MinSpeed, MaxSpeed);
     }
 }

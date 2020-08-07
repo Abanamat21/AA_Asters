@@ -10,30 +10,43 @@ public class PoolManager
 
     delegate GameObject loadAction();
 
+    private static PoolManager instance;
+    public static PoolManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new PoolManager();
+
+            }
+            return instance;
+        }
+    }
     public GameObject Spawn(GameObject prephab, Vector3 position, Quaternion rotation, GameObject parent)
     {
         return Spawn(prephab, position, rotation, parent, 
             delegate
             {
-                return GameController.instance.services.loader.InstantiateIt(prephab, position, rotation, parent);
+                return Loader.Instance.InstantiateIt(prephab, position, rotation, parent);
             });
     }
 
     public GameObject Spawn(AsteroidToLoad asteroid)
     {
-        return Spawn(asteroid.prephab, asteroid.position, asteroid.quaternion, asteroid.parent,
+        return Spawn(asteroid.Prephab, asteroid.Position, asteroid.ObjectQuaternion, asteroid.Parent,
             delegate
             {
-                return GameController.instance.services.loader.InstantiateIt(asteroid);
+                return Loader.Instance.InstantiateIt(asteroid);
             });
     }
 
     public GameObject Spawn(ProjectileToLoad projectile)
     {
-        return Spawn(projectile.prephab, projectile.position, projectile.quaternion, projectile.parent,
+        return Spawn(projectile.Prephab, projectile.Position, projectile.ObjectQuaternion, projectile.Parent,
             delegate
             {
-                return GameController.instance.services.loader.InstantiateIt(projectile);
+                return Loader.Instance.InstantiateIt(projectile);
             });
     }
 
